@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Delight - hello!</title>
-</head>
-<body>
-    <p>I made my first page, yeah!</p>
-</body>
-</html>
+{% extends "inventory/base.html" %}
+
+{% load static %}
+
+{% block head %}    
+<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<p>Welcome! This is home - extending from base</p>
+
+<div>
+    <a href="{% url 'menus' %}">Menus</a>
+    <a href="{% url 'ingredients' %}">Ingredients</a>
+    <a href="{% url 'purchases' %}">Purchases</a>
+    <a href="{% url 'reports' %}">Reports</a>
+</div>
+
+{% endblock %}
