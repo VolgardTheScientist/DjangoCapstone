@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
-    quantity = models.IntegerField(default=0)    
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
     unit_price = models.IntegerField(default=0)
 
     GRAM = "g"
@@ -37,11 +37,15 @@ class Ingredient(models.Model):
     class Meta:
         ordering = ["name"]
 
-# class Menu(models.Model):
-#     name = models.CharField(max_length=200)
-#     quantity = models.IntegerField(default=0)
-#     unit = models.IntegerField(default=0)
-#     owner = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+class MenuItem(models.Model):
+    title = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
+
+    def __str__(self):
+        return self.title 
+    class Meta:
+        ordering = ["title"]    
+
 # 
 # class Purchase(models.Model):
 #   pass

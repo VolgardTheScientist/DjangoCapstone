@@ -9,7 +9,7 @@ def ingredients(request):
   return render(request, "inventory/ingredients.html")
 
 def menus(request):
-  return render(request, "inventory/menus.html")
+  return render(request, "inventory/menuitem.html")
 
 def purchases(request):
   return render(request, "inventory/purchases.html")
