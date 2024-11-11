@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Ingredient(models.Model):
@@ -46,9 +47,21 @@ class MenuItem(models.Model):
     class Meta:
         ordering = ["title"]    
 
-# 
-# class Purchase(models.Model):
-#   pass
-# 
-# class Receipe(models.Model):
-#   pass
+
+class Purchase(models.Model):
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Purchase of {self.menu_item} on {self.date.strftime('%Y-%m-%d %H:%M:%S')}"
+
+
+class ReceipeRequirement(models.Model):
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
+
+    def __str__(self):
+        return f"{self.menu_item} - {self.ingredient} (Qty: {self.quantity})"
+    class Meta:
+        ordering = ["menu_item"]

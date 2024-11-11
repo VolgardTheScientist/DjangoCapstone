@@ -16,3 +16,6 @@ def purchases(request):
 
 def reports(request):
   return render(request, "inventory/reports.html")
+
+def receiperequirements(request):
+  return render(request, "inventory/receiperequirements.html")
