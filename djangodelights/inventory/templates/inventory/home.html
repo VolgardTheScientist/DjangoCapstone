@@ -8,13 +8,13 @@
 
 {% block content %}
 
-<p>Welcome! This is home - extending from base</p>
-
-<div>
-    <a href="{% url 'menus' %}">Menus</a>
-    <a href="{% url 'ingredients' %}">Ingredients</a>
-    <a href="{% url 'purchases' %}">Purchases</a>
-    <a href="{% url 'reports' %}">Reports</a>
-</div>
+<div class="center-content">
+    <p>Welcome! This is home - extending from base</p>
+    <div class="button-container">
+        <a href="{% url 'menuslist' %}" class="button">Menus</a>
+        <a href="{% url 'ingredientslist' %}" class="button">Ingredients</a>
+        <a href="{% url 'purchases' %}" class="button">Purchases</a>
+        <a href="{% url 'reports' %}" class="button">Reports</a>
+    </div>
 
 {% endblock %}

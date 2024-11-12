@@ -2,7 +2,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 /* Apply the Roboto font to the entire document */
+
+
+/* Centering the content inside the base content block */
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.center-content a {
+    margin: 0.5rem 0;
+}
+
+/* Ensuring the table remains centered and responsive */
+table {
+    width: 60%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #f8f8f8;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
 body {
+    text-align: center;
     font-family: 'Roboto', sans-serif;
     font-weight: 400; /* Default weight */
     line-height: 1.6;
@@ -27,6 +56,8 @@ h1 {
 }
 
 h2 {
+    text-align: center;
+    margin-top: 1rem;
     font-weight: 700;
     font-size: 2rem;
     margin-bottom: 0.8rem;
@@ -122,4 +153,72 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+/* General table styling */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #f8f8f8;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table header styling */
+th {
+    background-color: #444;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #666;
+}
+
+/* Table rows styling */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    color: #333;
+}
+
+/* Zebra striping for rows */
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
+/* Highlight row on hover */
+tr:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+/* Button container for spacing */
+.button-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Styling for the buttons */
+.button {
+    display: inline-block;
+    padding: 0.8rem 1.2rem;
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #004085; /* Even darker blue when clicked */
 }

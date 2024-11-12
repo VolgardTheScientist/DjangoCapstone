@@ -7,7 +7,22 @@
 {% endblock %}
 
 {% block content %}
+<h2>Menus</h2>
+<a href="{% url 'menuslist' %}"></a>
+<table id="Menus">
+  <tr>
+    <th>Dish</th>
+    <th>Price</th>
+  </tr> 
+	<tr>
+  {% for menu in menuitem_list %}
+  </tr>
+  <tr>
+      <td>{{ menu.title }}</td>
+      <td>{{ menu.price }}</td>
 
-<p>Menus</p>
+  </tr>
+  {% endfor %}
+</table>
 
 {% endblock %}
