@@ -1,0 +1,30 @@
+{% extends "inventory/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Receipes</h2>
+<table id="Menus">
+    <tr>
+        <th>Menu item</th>
+        <th>Ingredients</th>
+        <th>Quantity</th>
+        <th>Unit</th>
+    </tr>
+    {% for receipe in receiperequirement_list %}
+    <tr>
+        <td>{{ receipe.menu_item }}</td>
+        <td>{{ receipe.ingredient }}</td>
+        <td>{{ receipe.quantity }}</td>
+        <td>{{ receipe.ingredient.unit }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'receipecreate'%}"><button class="btn">Add Ingredient to Receipe</button></a>
+
+{% endblock %}

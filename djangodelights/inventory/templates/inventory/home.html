@@ -9,11 +9,16 @@
 {% block content %}
 
 <div class="center-content">
-    <p>Welcome! This is home - extending from base</p>
+    <p>Welcome!</p>
+    <p>What changes would you like to register today?</p>
+    <p>Would you like to inspect the profit / revenue report?</p>
     <div class="button-container">
         <a href="{% url 'menuslist' %}" class="button">Menus</a>
         <a href="{% url 'ingredientslist' %}" class="button">Ingredients</a>
-        <a href="{% url 'purchases' %}" class="button">Purchases</a>
+        <a href="{% url 'purchaseslist' %}" class="button">Purchases</a>
+        {% comment %}
+        <a href="{% url 'receiperequirements' %}" class="button">Receipes</a>
+        {% endcomment %}
         <a href="{% url 'reports' %}" class="button">Reports</a>
     </div>
 

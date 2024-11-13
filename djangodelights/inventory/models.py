@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 # Create your models here.
 class Ingredient(models.Model):
@@ -38,6 +39,9 @@ class Ingredient(models.Model):
     class Meta:
         ordering = ["name"]
 
+    def get_absolute_url(self):
+        return reverse("ingredientcreate") 
+
 class MenuItem(models.Model):
     title = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
@@ -45,7 +49,9 @@ class MenuItem(models.Model):
     def __str__(self):
         return self.title 
     class Meta:
-        ordering = ["title"]    
+        ordering = ["title"]   
+    def get_absolute_url(self):
+        return reverse("menuitemcreate") 
 
 
 class Purchase(models.Model):
@@ -54,6 +60,7 @@ class Purchase(models.Model):
 
     def __str__(self):
         return f"Purchase of {self.menu_item} on {self.date.strftime('%Y-%m-%d %H:%M:%S')}"
+
 
 
 class ReceipeRequirement(models.Model):
@@ -65,3 +72,5 @@ class ReceipeRequirement(models.Model):
         return f"{self.menu_item} - {self.ingredient} (Qty: {self.quantity})"
     class Meta:
         ordering = ["menu_item"]
+    def get_absolute_url(self):
+        return reverse("receipecreate") 

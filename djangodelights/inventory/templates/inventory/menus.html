@@ -2,27 +2,34 @@
 
 {% load static %}
 
-{% block head %}    
+{% block head %}
 <link rel="stylesheet" href="{% static 'inventory/style.css' %}">
 {% endblock %}
 
 {% block content %}
 <h2>Menus</h2>
-<a href="{% url 'menuslist' %}"></a>
 <table id="Menus">
-  <tr>
-    <th>Dish</th>
-    <th>Price</th>
-  </tr> 
-	<tr>
-  {% for menu in menuitem_list %}
-  </tr>
-  <tr>
-      <td>{{ menu.title }}</td>
-      <td>{{ menu.price }}</td>
-
-  </tr>
-  {% endfor %}
+    <tr>
+        <th>Dish</th>
+        <th>Price</th>
+        <th>Ingredients</th>
+    </tr>
+    {% for menu in menuitem_list %}
+    <tr>
+        <td>{{ menu.title }}</td>
+        <td>{{ menu.price }}</td>
+        <td>
+            {% for req in menu.receiperequirement_set.all %}
+                {{ req.ingredient.name }} ({{ req.quantity }} {{ req.ingredient.unit }})<br>
+            {% empty %}
+                No ingredients.
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
 </table>
+
+<a href="{% url 'menuitemcreate'%}"><button class="btn">Add Menu Item</button></a> 
+<a href="{% url 'receipecreate'%}"><button class="btn">Add Ingredient to Receipe</button></a>
 
 {% endblock %}

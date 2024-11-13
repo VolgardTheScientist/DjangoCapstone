@@ -1,10 +1,8 @@
-{% extends "inventory/base.html" %}
-
-{% load static %}
-
-{% block head %}    
-<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
-{% endblock %}
+{% extends "inventory/base.html" %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'inventory/style.css' %}" />
+{% endblock %} 
 
 {% block content %}
 <h2>Ingredients</h2>
@@ -15,17 +13,27 @@
     <th>Quantity</th>
     <th>Unit</th>
     <th>Unit Price</th>
-  </tr> 
-	<tr>
-  {% for ingredient in ingredient_list %}
+    {% comment %}
+    <th>Edit</th>
+    {% endcomment %}
+    <th>Delete</th>
   </tr>
+
+  {% for ingredient in ingredient_list %}
+
   <tr>
-      <td>{{ ingredient.name }}</td>
-      <td>{{ ingredient.quantity }}</td>
-      <td>{{ ingredient.unit }}</td>
-      <td>{{ ingredient.unit_price }}</td>
+    <td>{{ ingredient.name }}</td>
+    <td>{{ ingredient.quantity }}</td>
+    <td>{{ ingredient.unit }}</td>
+    <td>{{ ingredient.unit_price }}</td>
+    {% comment %}
+    <td><a href="{% url 'ingredientupdate' ingredient.id %}">Edit</a></td>
+    {% endcomment %}
+    <td><a href="{% url 'ingredientdelete' ingredient.id %}">Delete</a></td>
   </tr>
   {% endfor %}
 </table>
+
+<a href="{% url 'ingredientcreate'%}"><button class="btn">Add Ingredient</button></a>
 
 {% endblock %}
