@@ -1,0 +1,30 @@
+{% extends "inventory/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Sales Report</h2>
+<table id="SalesReport">
+    <tr>
+        <th>Dish</th>
+        <th>Cost</th>
+        <th>Price</th>
+        <th>Profit</th>
+    </tr>
+    {% for sale in sales_data %}
+    <tr>
+        <td>{{ sale.title }}</td>
+        <td>{{ sale.cost|floatformat:2 }}</td>
+        <td>{{ sale.price|floatformat:2 }}</td>
+        <td>{{ sale.profit|floatformat:2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total Revenue: {{ total_revenue|floatformat:2 }}</h3>
+<h3>Total Profit: {{ total_profit|floatformat:2 }}</h3>
+{% endblock %}

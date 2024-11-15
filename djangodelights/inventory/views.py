@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DeleteView
 from .models import Ingredient, MenuItem, ReceipeRequirement, Purchase
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
-from .forms import AddMenuItem, AddIngredient, AddReceipe, AddPurchase
+from django.views.generic.edit import CreateView, UpdateView
+from .forms import AddMenuItem, AddIngredient, AddReceipe, AddPurchase, IngredientUpdateForm
 
 def home(request):
   return render(request, "inventory/home.html")
@@ -30,6 +30,12 @@ class IngredientsList(ListView):
 class MenusList(ListView):
   model = MenuItem
   template_name = "inventory/menus.html"
+
+class IngredientUpdate(UpdateView):
+  model = Ingredient
+  template_name = "inventory/ingredient_update_form.html"
+  form_class = IngredientUpdateForm
+  success_url = reverse_lazy('ingredientslist')
 
 class IngredientDelete(DeleteView):
   model = Ingredient
@@ -64,3 +70,32 @@ class AddPurchaseCreate(CreateView):
   template_name = "inventory/add_purchase.html"
   form_class = AddPurchase
   success_url = reverse_lazy('purchaseslist')
+
+def sales_report(request):
+    purchases = Purchase.objects.all()
+
+    total_revenue = 0
+    total_profit = 0
+
+    sales_data = []
+    for purchase in purchases:
+        item = purchase.menu_item
+        cost = purchase.calculate_cost()
+        revenue = purchase.calculate_revenue()
+        profit = purchase.calculate_profit()
+
+        sales_data.append({
+            'title': item.title,
+            'cost': cost,
+            'price': item.price,
+            'profit': profit,
+        })
+
+        total_revenue += revenue
+        total_profit += profit
+
+    return render(request, 'inventory/sales_report.html', {
+        'sales_data': sales_data,
+        'total_revenue': total_revenue,
+        'total_profit': total_profit
+    })

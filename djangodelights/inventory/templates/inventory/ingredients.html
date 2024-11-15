@@ -13,9 +13,9 @@
     <th>Quantity</th>
     <th>Unit</th>
     <th>Unit Price</th>
-    {% comment %}
+
     <th>Edit</th>
-    {% endcomment %}
+
     <th>Delete</th>
   </tr>
 
@@ -26,9 +26,9 @@
     <td>{{ ingredient.quantity }}</td>
     <td>{{ ingredient.unit }}</td>
     <td>{{ ingredient.unit_price }}</td>
-    {% comment %}
+
     <td><a href="{% url 'ingredientupdate' ingredient.id %}">Edit</a></td>
-    {% endcomment %}
+
     <td><a href="{% url 'ingredientdelete' ingredient.id %}">Delete</a></td>
   </tr>
   {% endfor %}

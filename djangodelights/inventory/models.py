@@ -52,6 +52,16 @@ class MenuItem(models.Model):
         ordering = ["title"]   
     def get_absolute_url(self):
         return reverse("menuitemcreate") 
+    
+    def calculate_cost(self):
+        total_cost = 0
+        for req in self.receiperequirement_set.all():
+            total_cost += req.quantity * req.ingredient.unit_price
+        return total_cost
+
+    def calculate_profit(self):
+        cost = self.calculate_cost()
+        return self.price - cost
 
 
 class Purchase(models.Model):
@@ -60,6 +70,15 @@ class Purchase(models.Model):
 
     def __str__(self):
         return f"Purchase of {self.menu_item} on {self.date.strftime('%Y-%m-%d %H:%M:%S')}"
+    
+    def calculate_cost(self):
+        return self.menu_item.calculate_cost()
+
+    def calculate_revenue(self):
+        return self.menu_item.price
+
+    def calculate_profit(self):
+        return self.calculate_revenue() - self.calculate_cost()
 
 
 
@@ -74,3 +93,4 @@ class ReceipeRequirement(models.Model):
         ordering = ["menu_item"]
     def get_absolute_url(self):
         return reverse("receipecreate") 
+    

@@ -20,3 +20,8 @@ class AddPurchase(forms.ModelForm):
   class Meta:
     model = Purchase
     fields = ("__all__")
+
+class IngredientUpdateForm(forms.ModelForm):
+  class Meta:
+    model = Ingredient
+    fields = ['quantity']
