@@ -76,6 +76,7 @@ def sales_report(request):
 
     total_revenue = 0
     total_profit = 0
+    total_cost = 0
 
     sales_data = []
     for purchase in purchases:
@@ -93,9 +94,11 @@ def sales_report(request):
 
         total_revenue += revenue
         total_profit += profit
+        total_cost  += cost
 
     return render(request, 'inventory/sales_report.html', {
         'sales_data': sales_data,
+        'total_cost': total_cost,
         'total_revenue': total_revenue,
         'total_profit': total_profit
     })
