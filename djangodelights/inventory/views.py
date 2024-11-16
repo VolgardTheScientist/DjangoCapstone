@@ -1,76 +1,81 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DeleteView
 from .models import Ingredient, MenuItem, ReceipeRequirement, Purchase
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from .forms import AddMenuItem, AddIngredient, AddReceipe, AddPurchase, IngredientUpdateForm
 
+#Login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import logout
+
+def logout_view(request):
+  logout(request)
+  return redirect("home")
+
+@login_required
 def home(request):
   return render(request, "inventory/home.html")
 
-# def ingredients(request):
-#   return render(request, "inventory/ingredients.html")
-
-# def menus(request):
-#   return render(request, "inventory/menuitem.html")
-
-# def purchases(request):
-#   return render(request, "inventory/purchases.html")
-
+@login_required
 def reports(request):
   return render(request, "inventory/reports.html")
 
+@login_required
 def receiperequirements(request):
   return render(request, "inventory/receipes.html")
 
-class IngredientsList(ListView):
+class IngredientsList(LoginRequiredMixin,ListView):
   model = Ingredient
   template_name = "inventory/ingredients.html"
 
-class MenusList(ListView):
+class MenusList(LoginRequiredMixin, ListView):
   model = MenuItem
   template_name = "inventory/menus.html"
 
-class IngredientUpdate(UpdateView):
+class IngredientUpdate(LoginRequiredMixin, UpdateView):
   model = Ingredient
   template_name = "inventory/ingredient_update_form.html"
   form_class = IngredientUpdateForm
   success_url = reverse_lazy('ingredientslist')
 
-class IngredientDelete(DeleteView):
+class IngredientDelete(LoginRequiredMixin, DeleteView):
   model = Ingredient
   template_name = "inventory/ingredient_delete_form.html"
   success_url = reverse_lazy('ingredientslist')
 
-class PurchasesList(ListView):
+class PurchasesList(LoginRequiredMixin, ListView):
   model = Purchase
   template_name = "inventory/purchases.html"
 
-class ReceipesList(ListView):
+class ReceipesList(LoginRequiredMixin, ListView):
   model = ReceipeRequirement
   template_name = "inventory/receipes.html"
 
-class AddMenuItemCreate(CreateView):
+class AddMenuItemCreate(LoginRequiredMixin, CreateView):
   model = MenuItem
   template_name = "inventory/add_menu_item.html"
   form_class = AddMenuItem
 
-class AddIngredientCreate(CreateView):
+class AddIngredientCreate(LoginRequiredMixin, CreateView):
   model = Ingredient
   template_name = "inventory/add_menu_item.html"
   form_class = AddIngredient
 
-class AddReceipeCreate(CreateView):
+class AddReceipeCreate(LoginRequiredMixin, CreateView):
   model = ReceipeRequirement
   template_name = "inventory/add_receipe.html"
   form_class = AddReceipe
 
-class AddPurchaseCreate(CreateView):
+class AddPurchaseCreate(LoginRequiredMixin, CreateView):
   model = Purchase
   template_name = "inventory/add_purchase.html"
   form_class = AddPurchase
   success_url = reverse_lazy('purchaseslist')
 
+@login_required
 def sales_report(request):
     purchases = Purchase.objects.all()
 

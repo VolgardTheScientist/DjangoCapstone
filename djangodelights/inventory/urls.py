@@ -1,8 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
    path('', views.home, name="home"),
+   path("accounts/", include("django.contrib.auth.urls"), name="login"),
+   path("logout/", views.logout_view, name="logout"),
    path('ingredients/', views.IngredientsList.as_view(), name='ingredientslist'),
    path('menuitem/', views.MenusList.as_view(), name="menuslist"),
    path('purchases/', views.PurchasesList.as_view(), name="purchaseslist"),
